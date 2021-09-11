@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="16dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+            tools:src="@tools:sample/avatars"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/avatarImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    <TextView
+            android:layout_marginStart="8dp"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:id="@+id/userNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/avatarImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/groupNameTextView"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="User name"
+            />
+
+    <TextView
+            android:layout_marginStart="8dp"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_marginTop="8dp"
+            android:id="@+id/groupNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/avatarImageView"
+            app:layout_constraintTop_toBottomOf="@+id/userNameTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Group name"
+            />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
