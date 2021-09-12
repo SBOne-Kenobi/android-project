@@ -8,23 +8,18 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.io.IOException
-import java.net.HttpURLConnection
 import java.net.URL
+import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
 
-//    private fun downloadBitmap(urlString: String): Bitmap? {
-//        return try {
-//            val url = URL(urlString)
-//            val connection = url.openConnection() as HttpURLConnection
-//            connection.doInput = true
-//            connection.connect()
-//            val stream = connection.inputStream
-//            BitmapFactory.decodeStream(stream)
-//        } catch (e: IOException) {
-//            null
-//        }
-//    }
+    fun URL.toBitmap(): Bitmap? {
+        return try {
+            BitmapFactory.decodeStream(openStream())
+        } catch (e: IOException) {
+            null
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +28,25 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.usersRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-//        val bitmap = downloadBitmap("https://avatars.mds.yandex.net/get-pdb/1690495/7684cce3-d3a0-4b27-8d58-74ccc8cd2698/s1200")
+        val url = URL("https://avatars.mds.yandex.net/get-pdb/" +
+                "1690495/7684cce3-d3a0-4b27-8d58-74ccc8cd2698/s1200")
+
+        val result: Deferred<Bitmap?> = GlobalScope.async {
+            url.toBitmap()
+        }
 
         val adapter = UserAdapter()
         recyclerView.adapter = adapter
         adapter.userList = loadUsers()
-//        adapter.testAvatar = bitmap
         adapter.notifyDataSetChanged()
+
+
+        GlobalScope.launch(Dispatchers.IO) {
+            adapter.testAvatar = result.await()
+            runOnUiThread {
+                adapter.notifyDataSetChanged()
+            }
+        }
 
         val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         getDrawable(R.drawable.divider_user)?.let { itemDecoration.setDrawable(it) }
