@@ -1,17 +1,16 @@
 package com.rustamsadykov.firstapp
 
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     var userList : List<User> = emptyList()
-    var testAvatar: Bitmap? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val userItemView =
@@ -20,11 +19,11 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        if (testAvatar == null)
-            holder.avatarImageView.setImageResource(R.mipmap.ic_launcher)
-        else
-            holder.avatarImageView.setImageBitmap(testAvatar)
+        Glide.with(holder.avatarImageView)
+            .load(userList[position].avatarUrl)
+            .circleCrop()
+            .placeholder(R.mipmap.ic_launcher)
+            .into(holder.avatarImageView)
         holder.userNameTextView.text = userList[position].userName
         holder.groupNameTextView.text = userList[position].groupName
     }
