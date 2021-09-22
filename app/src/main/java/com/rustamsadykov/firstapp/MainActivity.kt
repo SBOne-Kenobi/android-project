@@ -2,7 +2,7 @@ package com.rustamsadykov.firstapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
@@ -17,47 +17,47 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
 
     private val viewBinding by viewBinding(ActivityMainBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val adapter = setupRecyclerView()
+        setupRecyclerView()
 
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.viewState.collect { state ->
-                    when (state) {
-                        is MainViewModel.ViewState.Data -> {
-                            adapter.userList = state.userList
-                            adapter.notifyDataSetChanged()
-                            viewBinding.usersRecyclerView.isVisible = true
-                            viewBinding.progressBar.isVisible = false
-                        }
-                        else -> {
-                            viewBinding.usersRecyclerView.isVisible = false
-                            viewBinding.progressBar.isVisible = true
-                        }
-                    }
-                }
+                viewModel.viewState.collect { renderViewState(it) }
             }
         }
     }
 
-    private fun setupRecyclerView(): UserAdapter {
-        val recyclerView = findViewById<RecyclerView>(R.id.usersRecyclerView)
+    private fun renderViewState(viewState: MainViewModel.ViewState) {
+        when (viewState) {
+            is MainViewModel.ViewState.Loading -> {
+                viewBinding.usersRecyclerView.isVisible = false
+                viewBinding.progressBar.isVisible = true
+            }
+            is MainViewModel.ViewState.Data -> {
+                viewBinding.usersRecyclerView.isVisible = true
+                (viewBinding.usersRecyclerView.adapter as UserAdapter).apply {
+                    userList = viewState.userList
+                    notifyDataSetChanged()
+                }
+                viewBinding.progressBar.isVisible = false
+            }
+        }
+    }
+
+    private fun setupRecyclerView() {
+        val recyclerView = viewBinding.usersRecyclerView
 
         val itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         getDrawable(R.drawable.divider_user)?.let { itemDecoration.setDrawable(it) }
         recyclerView.addItemDecoration(itemDecoration)
 
-        val adapter = UserAdapter()
-        recyclerView.adapter = adapter
-
-        return adapter
+        recyclerView.adapter = UserAdapter()
     }
 
 }

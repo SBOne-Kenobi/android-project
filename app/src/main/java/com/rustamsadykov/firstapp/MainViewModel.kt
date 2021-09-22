@@ -17,13 +17,17 @@ class MainViewModel : ViewModel() {
         data class Data(val userList: List<User>) : ViewState()
     }
 
-    private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(ViewState.Loading)
-    val viewState: StateFlow<ViewState> = _viewState
+    private val _viewState: MutableStateFlow<ViewState> =
+        MutableStateFlow(ViewState.Loading)
+
+    val viewState: Flow<ViewState>
+        get() = _viewState.asStateFlow()
 
     init {
         viewModelScope.launch {
+            _viewState.emit(ViewState.Loading)
             val users = loadUsers()
-            _viewState.value = ViewState.Data(users)
+            _viewState.emit(ViewState.Data(users))
         }
     }
 
