@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rustamsadykov.firstapp.R
-import com.rustamsadykov.firstapp.entity.User
+import com.rustamsadykov.firstapp.domain.User
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 

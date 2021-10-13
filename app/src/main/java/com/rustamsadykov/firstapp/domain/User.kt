@@ -1,4 +1,4 @@
-package com.rustamsadykov.firstapp.entity
+package com.rustamsadykov.firstapp.domain
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

@@ -1,7 +1,5 @@
 package com.rustamsadykov.firstapp.ui
 
-import androidx.lifecycle.ViewModel
+import com.rustamsadykov.firstapp.ui.base.BaseViewModel
 
-class MainViewModel : ViewModel() {
-
-}
+class MainViewModel : BaseViewModel()

@@ -3,7 +3,6 @@ package com.rustamsadykov.firstapp.ui.onboarding
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.exoplayer2.ExoPlayer
@@ -15,8 +14,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentOnboardingBinding
+import com.rustamsadykov.firstapp.ui.base.BaseFragment
 
-class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
+class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
 
     private val viewBinding by viewBinding(FragmentOnboardingBinding::bind)
 

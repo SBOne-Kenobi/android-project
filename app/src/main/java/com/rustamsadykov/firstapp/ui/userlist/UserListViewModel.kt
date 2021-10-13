@@ -1,9 +1,9 @@
 package com.rustamsadykov.firstapp.ui.userlist
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rustamsadykov.firstapp.networking.Api
-import com.rustamsadykov.firstapp.entity.User
+import com.rustamsadykov.firstapp.repository.network.Api
+import com.rustamsadykov.firstapp.domain.User
+import com.rustamsadykov.firstapp.ui.base.BaseViewModel
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -14,7 +14,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class UserListViewModel : ViewModel() {
+class UserListViewModel : BaseViewModel() {
 
     sealed class ViewState {
         object Loading : ViewState()

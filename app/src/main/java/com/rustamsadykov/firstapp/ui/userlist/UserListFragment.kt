@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,11 +13,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.rustamsadykov.firstapp.databinding.FragmentUserListBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rustamsadykov.firstapp.R
+import com.rustamsadykov.firstapp.ui.base.BaseFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
-class UserListFragment : Fragment(R.layout.fragment_user_list) {
+class UserListFragment : BaseFragment(R.layout.fragment_user_list) {
 
     private val viewModel: UserListViewModel by viewModels()
 
