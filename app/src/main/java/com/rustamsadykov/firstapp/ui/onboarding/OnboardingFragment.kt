@@ -16,6 +16,7 @@ import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentOnboardingBinding
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
+import java.util.*
 
 class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
 
@@ -24,6 +25,8 @@ class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
     private val viewModel: OnboardingViewModel by viewModels()
 
     private var player: ExoPlayer? = null
+
+    private var scrollTimer: Timer? = null // FIXME: should it be here or ViewModel?
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +43,30 @@ class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
         viewBinding.onboardingViewPager.setTextPages()
         viewBinding.onboardingViewPager.attachDots(viewBinding.onboardingTextTabLayout)
         muteVideoHandler()
+        startScrollTimer()
         setupListeners()
+    }
+
+    private fun scrollTask() = object : TimerTask() {
+        override fun run() {
+            activity?.runOnUiThread {
+                viewBinding.onboardingViewPager.apply {
+                    setCurrentItem((currentItem + 1) % (adapter?.itemCount ?: 1), true)
+                }
+            }
+        }
+    }
+
+    private fun startScrollTimer() {
+        scrollTimer?.cancel()
+        scrollTimer = Timer().apply {
+            scheduleAtFixedRate(scrollTask(), 4000, 4000)
+        }
+    }
+
+    private fun stopScrollTimer() {
+        scrollTimer?.cancel()
+        scrollTimer = null
     }
 
     private fun setupListeners() {
@@ -54,6 +80,25 @@ class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
         }
 
         viewBinding.volumeControlButton.setOnClickListener(::muteButtonListener)
+        viewBinding.onboardingViewPager.registerOnPageChangeCallback(pageChangeCallback)
+    }
+
+    private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+
+        override fun onPageScrollStateChanged(state: Int) {
+            super.onPageScrollStateChanged(state)
+            when (state) {
+                ViewPager2.SCROLL_STATE_IDLE -> {
+                    startScrollTimer()
+                }
+                ViewPager2.SCROLL_STATE_DRAGGING -> {
+                    stopScrollTimer()
+                }
+                ViewPager2.SCROLL_STATE_SETTLING -> {
+                    stopScrollTimer()
+                }
+            }
+        }
     }
 
     private fun muteButtonListener(view: View) {
