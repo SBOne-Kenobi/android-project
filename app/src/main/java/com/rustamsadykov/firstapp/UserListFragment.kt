@@ -1,5 +1,6 @@
 package com.rustamsadykov.firstapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
@@ -10,9 +11,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
-import kotlinx.coroutines.launch
 import com.rustamsadykov.firstapp.databinding.FragmentUserListBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 class UserListFragment : Fragment(R.layout.fragment_user_list) {
@@ -24,14 +26,18 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        observeViewState()
+    }
 
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.viewState.collect { renderViewState(it) }
+    private fun observeViewState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.viewState.collect(::renderViewState)
             }
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun renderViewState(viewState: UserListViewModel.ViewState) {
         when (viewState) {
             is UserListViewModel.ViewState.Loading -> {
