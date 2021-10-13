@@ -1,7 +1,9 @@
-package com.rustamsadykov.firstapp
+package com.rustamsadykov.firstapp.ui.userlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rustamsadykov.firstapp.networking.Api
+import com.rustamsadykov.firstapp.entity.User
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow

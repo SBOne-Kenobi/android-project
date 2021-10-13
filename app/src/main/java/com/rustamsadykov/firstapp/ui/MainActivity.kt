@@ -1,8 +1,9 @@
-package com.rustamsadykov.firstapp
+package com.rustamsadykov.firstapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {

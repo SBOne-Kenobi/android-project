@@ -1,4 +1,4 @@
-package com.rustamsadykov.firstapp
+package com.rustamsadykov.firstapp.ui.userlist
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.rustamsadykov.firstapp.databinding.FragmentUserListBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.rustamsadykov.firstapp.R
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 

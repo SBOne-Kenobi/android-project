@@ -1,5 +1,6 @@
-package com.rustamsadykov.firstapp
+package com.rustamsadykov.firstapp.networking
 
+import com.rustamsadykov.firstapp.entity.User
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import retrofit2.http.GET

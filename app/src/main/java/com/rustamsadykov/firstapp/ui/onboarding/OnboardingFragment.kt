@@ -1,4 +1,4 @@
-package com.rustamsadykov.firstapp
+package com.rustamsadykov.firstapp.ui.onboarding
 
 import android.os.Bundle
 import android.view.View
@@ -8,6 +8,7 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
+import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentOnboardingBinding
 
 class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {

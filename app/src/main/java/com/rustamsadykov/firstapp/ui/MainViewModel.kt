@@ -1,4 +1,4 @@
-package com.rustamsadykov.firstapp
+package com.rustamsadykov.firstapp.ui
 
 import androidx.lifecycle.ViewModel
 
