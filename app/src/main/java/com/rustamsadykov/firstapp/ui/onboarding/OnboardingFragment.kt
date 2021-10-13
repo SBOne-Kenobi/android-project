@@ -3,6 +3,7 @@ package com.rustamsadykov.firstapp.ui.onboarding
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.exoplayer2.ExoPlayer
@@ -20,6 +21,8 @@ class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
 
     private val viewBinding by viewBinding(FragmentOnboardingBinding::bind)
 
+    private val viewModel: OnboardingViewModel by viewModels()
+
     private var player: ExoPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +39,11 @@ class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
         viewBinding.playerView.player = player
         viewBinding.onboardingViewPager.setTextPages()
         viewBinding.onboardingViewPager.attachDots(viewBinding.onboardingTextTabLayout)
+        muteVideoHandler()
+        setupListeners()
+    }
 
+    private fun setupListeners() {
         viewBinding.signInButton.setOnClickListener {
             // TODO: Go to SignInFragment.
             Toast.makeText(requireContext(), "Нажата кнопка войти", Toast.LENGTH_SHORT).show()
@@ -44,6 +51,25 @@ class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
         viewBinding.signUpButton.setOnClickListener {
             // TODO: Go to SignUpFragment.
             Toast.makeText(requireContext(), "Нажата кнопка зарегистрироваться", Toast.LENGTH_SHORT).show()
+        }
+
+        viewBinding.volumeControlButton.setOnClickListener(::muteButtonListener)
+    }
+
+    private fun muteButtonListener(view: View) {
+        viewBinding.playerView.player?.let {
+            viewModel.isVideoMuted = !viewModel.isVideoMuted
+            muteVideoHandler()
+        }
+    }
+
+    private fun muteVideoHandler() {
+        if (viewModel.isVideoMuted) {
+            viewBinding.playerView.player?.volume = 0F
+            viewBinding.volumeControlButton.setImageResource(R.drawable.ic_volume_off_white_24dp)
+        } else {
+            viewBinding.playerView.player?.volume = 1F
+            viewBinding.volumeControlButton.setImageResource(R.drawable.ic_volume_up_white_24dp)
         }
     }
 
