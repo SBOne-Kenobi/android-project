@@ -1,11 +1,10 @@
 package com.rustamsadykov.firstapp.ui.userlist
 
 import androidx.lifecycle.viewModelScope
-import com.rustamsadykov.firstapp.repository.network.Api
 import com.rustamsadykov.firstapp.domain.User
+import com.rustamsadykov.firstapp.repository.network.Api
 import com.rustamsadykov.firstapp.ui.base.BaseViewModel
 import com.squareup.moshi.Moshi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,7 +35,6 @@ class UserListViewModel : BaseViewModel() {
     }
 
     private suspend fun loadUsers(): List<User> {
-        delay(2000)
         return provideApi().getUsers().data
     }
 

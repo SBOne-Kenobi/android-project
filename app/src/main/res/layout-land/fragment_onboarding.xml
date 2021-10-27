@@ -6,11 +6,11 @@
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/playerView"
-        android:layout_width="0dp"
-        android:layout_height="400dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="400dp"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:resize_mode="zoom"
         app:surface_type="texture_view"
         app:use_artwork="false"
@@ -30,26 +30,26 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_volume_off_white_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/playerView"
+        app:layout_constraintTop_toTopOf="@id/playerView" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/onboardingViewPager"
         android:layout_width="0dp"
         android:layout_height="100dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerView" />
+        app:layout_constraintStart_toEndOf="@id/playerView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/onboardingTextTabLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="@dimen/onboarding_dot_size"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/playerView"
         app:layout_constraintTop_toBottomOf="@+id/onboardingViewPager"
         app:tabBackground="@drawable/bg_onboarding_dot_normal"
         app:tabGravity="center"
@@ -67,7 +67,7 @@
         android:text="@string/onboarding_sign_in_button_text"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/playerView"
         app:layout_constraintTop_toBottomOf="@+id/onboardingTextTabLayout" />
 
     <Button
@@ -77,7 +77,7 @@
         android:layout_marginHorizontal="24dp"
         android:text="@string/onboarding_sign_up_button_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/playerView"
         app:layout_constraintTop_toBottomOf="@+id/signInButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

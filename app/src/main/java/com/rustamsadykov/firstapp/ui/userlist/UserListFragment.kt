@@ -10,9 +10,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.rustamsadykov.firstapp.databinding.FragmentUserListBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rustamsadykov.firstapp.R
+import com.rustamsadykov.firstapp.databinding.FragmentUserListBinding
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

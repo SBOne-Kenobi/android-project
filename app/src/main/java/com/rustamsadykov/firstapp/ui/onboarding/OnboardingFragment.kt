@@ -2,8 +2,8 @@ package com.rustamsadykov.firstapp.ui.onboarding
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.exoplayer2.ExoPlayer
@@ -71,12 +71,10 @@ class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
 
     private fun setupListeners() {
         viewBinding.signInButton.setOnClickListener {
-            // TODO: Go to SignInFragment.
-            Toast.makeText(requireContext(), "Нажата кнопка войти", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_onboardingFragment_to_signInFragment)
         }
         viewBinding.signUpButton.setOnClickListener {
-            // TODO: Go to SignUpFragment.
-            Toast.makeText(requireContext(), "Нажата кнопка зарегистрироваться", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_onboardingFragment_to_signUpFragment)
         }
 
         viewBinding.volumeControlButton.setOnClickListener(::muteButtonListener)
