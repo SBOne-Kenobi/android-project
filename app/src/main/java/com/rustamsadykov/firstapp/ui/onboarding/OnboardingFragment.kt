@@ -119,16 +119,19 @@ class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
     override fun onResume() {
         super.onResume()
         player?.play()
+        startScrollTimer()
     }
 
     override fun onPause() {
         super.onPause()
         player?.pause()
+        stopScrollTimer()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         player?.release()
+        stopScrollTimer()
     }
 
     private fun ViewPager2.setTextPages() {
