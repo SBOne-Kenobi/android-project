@@ -1,9 +1,9 @@
 package com.rustamsadykov.firstapp.ui
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -20,8 +20,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val viewBinding by viewBinding(ActivityMainBinding::bind)
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         observeAuthorizationStatus()
     }
 
@@ -38,10 +39,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val navController = findNavController(R.id.mainActivityNavigationHost)
         when (isAuthorized) {
             true -> {
-                if (navController.backQueue.any { it.destination.id == R.id.registered_user_nav_graph}) {
+                if (navController.backQueue.any { it.destination.id == R.id.registered_nav_graph}) {
                     return
                 }
-                navController.navigate(R.id.action_registeredUserNavGraph)
+                navController.navigate(R.id.action_registeredNavGraph)
             }
             false -> {
                 if (navController.backQueue.any { it.destination.id == R.id.guest_nav_graph}) {

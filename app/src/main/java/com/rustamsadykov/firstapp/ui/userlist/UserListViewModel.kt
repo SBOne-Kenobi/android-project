@@ -36,7 +36,6 @@ class UserListViewModel : BaseViewModel() {
     }
 
     private suspend fun loadUsers(): List<User> {
-        delay(2000)
         return provideApi().getUsers().data
     }
 

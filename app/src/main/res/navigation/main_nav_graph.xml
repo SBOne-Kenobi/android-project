@@ -11,8 +11,8 @@
         app:popUpToInclusive="true" />
 
     <action
-        android:id="@+id/action_registeredUserNavGraph"
-        app:destination="@+id/registered_user_nav_graph"
+        android:id="@+id/action_registeredNavGraph"
+        app:destination="@+id/registered_nav_graph"
         app:popUpTo="@+id/main_nav_graph"
         app:popUpToInclusive="true" />
 

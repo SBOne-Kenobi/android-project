@@ -9,29 +9,4 @@
         android:name="com.rustamsadykov.firstapp.ui.main.MainFragment"
         android:label="MainFragment" />
 
-    <fragment
-        android:id="@+id/newsFragment"
-        android:name="com.rustamsadykov.firstapp.ui.news.NewsFragment"
-        android:label="NewsFragment" />
-
-    <fragment
-        android:id="@+id/likesFragment"
-        android:name="com.rustamsadykov.firstapp.ui.likes.LikesFragment"
-        android:label="LikesFragment" />
-
-    <fragment
-        android:id="@+id/bookmarksFragment"
-        android:name="com.rustamsadykov.firstapp.ui.bookmarks.BookmarksFragment"
-        android:label="BookmarksFragment" />
-
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.rustamsadykov.firstapp.ui.profile.ProfileFragment"
-        android:label="ProfileFragment" />
-
-    <fragment
-        android:id="@+id/userListFragment"
-        android:name="com.rustamsadykov.firstapp.ui.userlist.UserListFragment"
-        android:label="UserListFragment" />
-
 </navigation>
