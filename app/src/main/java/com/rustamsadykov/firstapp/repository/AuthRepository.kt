@@ -10,7 +10,7 @@ object AuthRepository {
     val isAuthorizedFlow: Flow<Boolean>
         get() = _isAuthorizedFlow.asStateFlow()
 
-    suspend fun signIn() {
+    suspend fun signIn(email: String, password: String) {
         _isAuthorizedFlow.emit(true)
     }
 
