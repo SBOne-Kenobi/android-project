@@ -14,9 +14,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentUserListBinding
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-
 
 class UserListFragment : BaseFragment(R.layout.fragment_user_list) {
 

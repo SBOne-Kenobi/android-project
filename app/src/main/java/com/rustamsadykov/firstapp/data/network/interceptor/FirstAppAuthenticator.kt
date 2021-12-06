@@ -10,7 +10,7 @@ import okhttp3.Response
 import okhttp3.Route
 import timber.log.Timber
 
-class OurAwesomeAppAuthenticator(
+class FirstAppAuthenticator(
     private val authRepository: AuthRepository
 ) : Authenticator {
 

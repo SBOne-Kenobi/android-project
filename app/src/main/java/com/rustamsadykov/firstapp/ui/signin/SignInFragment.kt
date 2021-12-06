@@ -11,8 +11,10 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentSignInBinding
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
 
+@AndroidEntryPoint
 class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
     private val viewBinding by viewBinding(FragmentSignInBinding::bind)
@@ -29,26 +31,21 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.apply {
-
             signInButton.setOnClickListener {
                 viewModel.signIn(
                     email = emailEditText.text?.toString() ?: "",
                     password = passwordEditText.text?.toString() ?: ""
                 )
             }
-
             backButton.setOnClickListener {
                 onBackButtonPressed()
             }
-
             backButton.applyInsetter {
                 type(statusBars = true) { margin() }
             }
-
             signInButton.applyInsetter {
                 type(navigationBars = true) { margin() }
             }
-
         }
 
         subscribeToFormFields()

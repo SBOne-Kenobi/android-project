@@ -5,8 +5,6 @@ import com.rustamsadykov.firstapp.BuildConfig
 import com.rustamsadykov.firstapp.domain.User
 import com.rustamsadykov.firstapp.data.network.Api
 import com.rustamsadykov.firstapp.data.network.MockApi
-import com.rustamsadykov.firstapp.data.network.interceptor.OurAwesomeAppAuthenticator
-import com.rustamsadykov.firstapp.repository.AuthRepository
 import com.rustamsadykov.firstapp.ui.base.BaseViewModel
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.flow.Flow

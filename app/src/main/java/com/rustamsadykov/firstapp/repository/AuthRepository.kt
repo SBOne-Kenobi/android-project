@@ -1,7 +1,7 @@
 package com.rustamsadykov.firstapp.repository
 
+import com.rustamsadykov.firstapp.di.*
 import com.haroldadmin.cnradapter.NetworkResponse
-import com.rustamsadykov.firstapp.domain.AuthTokens
 import com.rustamsadykov.firstapp.data.network.Api
 import com.rustamsadykov.firstapp.data.network.request.CreateProfileRequest
 import com.rustamsadykov.firstapp.data.network.request.RefreshAuthTokensRequest
@@ -10,16 +10,23 @@ import com.rustamsadykov.firstapp.data.network.response.error.CreateProfileError
 import com.rustamsadykov.firstapp.data.network.response.error.RefreshAuthTokensErrorResponse
 import com.rustamsadykov.firstapp.data.network.response.error.SignInWithEmailErrorResponse
 import com.rustamsadykov.firstapp.data.persistent.LocalKeyValueStorage
+import com.rustamsadykov.firstapp.domain.AuthTokens
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
+import javax.inject.Inject
+import javax.inject.Singleton
+import dagger.Lazy
 
-class AuthRepository constructor(
-    private val api: Api,
+@Singleton
+class AuthRepository @Inject constructor(
+    private val apiLazy: Lazy<Api>,
     private val localKeyValueStorage: LocalKeyValueStorage,
-    externalCoroutineScope: CoroutineScope,
-    private val ioDispatcher: CoroutineDispatcher
+    @AppCoroutineScope externalCoroutineScope: CoroutineScope,
+    @IoCoroutineDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
+
+    private val api by lazy { apiLazy.get() }
 
     private val authTokensFlow: Deferred<MutableStateFlow<AuthTokens?>> =
         externalCoroutineScope.async(context = ioDispatcher, start = CoroutineStart.LAZY) {

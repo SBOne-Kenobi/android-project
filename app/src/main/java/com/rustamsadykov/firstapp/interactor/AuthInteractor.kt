@@ -6,8 +6,9 @@ import com.rustamsadykov.firstapp.domain.AuthTokens
 import com.rustamsadykov.firstapp.repository.AuthRepository
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
+import javax.inject.Inject
 
-class AuthInteractor constructor(
+class AuthInteractor @Inject constructor(
     private val authRepository: AuthRepository
 ) {
 
