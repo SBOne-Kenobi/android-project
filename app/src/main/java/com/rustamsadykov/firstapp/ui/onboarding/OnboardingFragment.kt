@@ -26,7 +26,7 @@ class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
 
     private var player: ExoPlayer? = null
 
-    private var scrollTimer: Timer? = null // FIXME: should it be here or ViewModel?
+    private var scrollTimer: Timer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

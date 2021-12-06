@@ -8,6 +8,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentEmailConfimationBinding
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
+import dev.chrisbanes.insetter.applyInsetter
 
 class EmailConfirmationFragment : BaseFragment(R.layout.fragment_email_confimation) {
 
@@ -27,6 +28,13 @@ class EmailConfirmationFragment : BaseFragment(R.layout.fragment_email_confimati
                 viewModel.signIn()
             }
 
+            confirmButton.applyInsetter {
+                type(navigationBars = true) { margin() }
+            }
+
+            backButton.applyInsetter {
+                type(statusBars = true) { margin() }
+            }
         }
     }
 

@@ -23,6 +23,7 @@ import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentSignUpBinding
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
 import com.rustamsadykov.firstapp.utils.extentions.getSpannedString
+import dev.chrisbanes.insetter.applyInsetter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -59,6 +60,12 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
                     Intent.ACTION_VIEW,
                     Uri.parse("https://policies.google.com/terms")
                 ))
+            }
+            backButton.applyInsetter {
+                type(statusBars = true) { margin() }
+            }
+            signUpButton.applyInsetter {
+                type(navigationBars = true) { margin() }
             }
         }
 

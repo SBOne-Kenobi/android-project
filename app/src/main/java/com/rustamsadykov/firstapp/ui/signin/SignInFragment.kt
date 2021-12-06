@@ -11,6 +11,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentSignInBinding
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
+import dev.chrisbanes.insetter.applyInsetter
 
 class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
@@ -38,6 +39,14 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
             backButton.setOnClickListener {
                 onBackButtonPressed()
+            }
+
+            backButton.applyInsetter {
+                type(statusBars = true) { margin() }
+            }
+
+            signInButton.applyInsetter {
+                type(navigationBars = true) { margin() }
             }
 
         }
