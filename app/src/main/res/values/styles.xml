@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.FirstApp.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Widget.FirstApp.Button.Primary">
+        <item name="backgroundTint">@color/brand_orange</item>
+    </style>
+
+    <style name="Widget.FirstApp.Button.Secondary">
+        <item name="backgroundTint">@color/brand_green</item>
+    </style>
+    
+</resources>

@@ -29,11 +29,6 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.apply {
 
-            decideSignInButtonEnabledState(
-                email = emailEditText.text?.toString(),
-                password = passwordEditText.text?.toString()
-            )
-
             signInButton.setOnClickListener {
                 viewModel.signIn(
                     email = emailEditText.text?.toString() ?: "",
@@ -57,12 +52,12 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                 return
             }
             AlertDialog.Builder(requireContext())
-                .setTitle(R.string.sign_in_back_alert_dialog_text)
+                .setTitle(R.string.common_back_alert_dialog_text)
                 .setNegativeButton(
-                    R.string.sign_in_back_alert_dialog_cancel_button_text
+                    R.string.common_back_alert_dialog_cancel_button_text
                 ) { dialog, _ -> dialog.dismiss() }
                 .setPositiveButton(
-                    R.string.sign_in_back_alert_dialog_apply_button_text
+                    R.string.common_back_alert_dialog_apply_button_text
                 ) { _, _ -> findNavController().popBackStack() }
                 .show()
         }
@@ -70,6 +65,10 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
 
     private fun subscribeToFormFields() {
         viewBinding.apply {
+            decideSignInButtonEnabledState(
+                email = emailEditText.text?.toString(),
+                password = passwordEditText.text?.toString()
+            )
 
             emailEditText.doAfterTextChanged { email ->
                 decideSignInButtonEnabledState(
