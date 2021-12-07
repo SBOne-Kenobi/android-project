@@ -8,11 +8,18 @@ import com.rustamsadykov.firstapp.data.network.response.GetUsersResponse
 import com.rustamsadykov.firstapp.data.network.response.VerificationTokenResponse
 import com.rustamsadykov.firstapp.data.network.response.error.*
 import com.rustamsadykov.firstapp.domain.AuthTokens
+import com.rustamsadykov.firstapp.domain.User
 
 class MockApi : Api {
 
     override suspend fun getUsers(): GetUsersResponse {
-        TODO("Not yet implemented")
+        return GetUsersResponse((0 until 20).map {
+            User(
+                "User $it",
+                "${it % 2 + 1}",
+                "https://thisanimedoesnotexist.ai/results/psi-1.3/seed${10000 + it}.png"
+            )
+        })
     }
 
     override suspend fun signInWithEmail(request: SignInWithEmailRequest): NetworkResponse<AuthTokens, SignInWithEmailErrorResponse> {

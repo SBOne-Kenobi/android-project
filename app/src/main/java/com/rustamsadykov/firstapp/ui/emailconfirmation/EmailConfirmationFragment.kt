@@ -8,8 +8,10 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentEmailConfimationBinding
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
 
+@AndroidEntryPoint
 class EmailConfirmationFragment : BaseFragment(R.layout.fragment_email_confimation) {
 
     private val viewBinding by viewBinding(FragmentEmailConfimationBinding::bind)
@@ -25,7 +27,7 @@ class EmailConfirmationFragment : BaseFragment(R.layout.fragment_email_confimati
             }
 
             confirmButton.setOnClickListener {
-                viewModel.signIn()
+                viewModel.signIn("", "")
             }
 
             confirmButton.applyInsetter {

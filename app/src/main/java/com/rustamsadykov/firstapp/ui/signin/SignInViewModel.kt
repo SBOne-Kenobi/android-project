@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import com.haroldadmin.cnradapter.NetworkResponse
 import com.rustamsadykov.firstapp.data.network.response.error.SignInWithEmailErrorResponse
 import com.rustamsadykov.firstapp.interactor.AuthInteractor
-import com.rustamsadykov.firstapp.repository.OldAuthRepository
 import com.rustamsadykov.firstapp.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -47,7 +46,6 @@ class SignInViewModel @Inject constructor(
                 Timber.e(error)
                 _signInActionStateFlow.emit(SignInActionState.UnknownError(NetworkResponse.UnknownError(error)))
             }
-            OldAuthRepository.signIn(email, password)
         }
     }
 

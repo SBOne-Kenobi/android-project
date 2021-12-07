@@ -23,10 +23,12 @@ import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentSignUpBinding
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
 import com.rustamsadykov.firstapp.utils.extentions.getSpannedString
+import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
 
     private val viewBinding by viewBinding(FragmentSignUpBinding::bind)
@@ -48,9 +50,9 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
             }
             signUpButton.setOnClickListener {
                 viewModel.signUp(
-                    firstname = viewBinding.firstnameEditText.text?.toString() ?: "",
-                    lastname = viewBinding.lastnameEditText.text?.toString() ?: "",
-                    nickname = viewBinding.nicknameEditText.text?.toString() ?: "",
+                    firstName = viewBinding.firstnameEditText.text?.toString() ?: "",
+                    lastName = viewBinding.lastnameEditText.text?.toString() ?: "",
+                    username = viewBinding.nicknameEditText.text?.toString() ?: "",
                     email = viewBinding.emailEditText.text?.toString() ?: "",
                     password = viewBinding.passwordEditText.text?.toString() ?: ""
                 )
