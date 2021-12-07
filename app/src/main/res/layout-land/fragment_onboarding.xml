@@ -40,6 +40,7 @@
         android:id="@+id/onboardingViewPager"
         android:layout_width="0dp"
         android:layout_height="100dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/playerView"
         app:layout_constraintTop_toTopOf="parent" />
@@ -59,25 +60,27 @@
         app:tabMaxWidth="18dp"
         app:tabMinWidth="18dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/signInButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/onboarding_sign_in_button_text"
-        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/playerView"
-        app:layout_constraintTop_toBottomOf="@+id/onboardingTextTabLayout" />
+        app:layout_constraintBottom_toTopOf="@+id/signUpButton" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/signUpButton"
+        style="@style/Widget.FirstApp.Button.Secondary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="48dp"
         android:text="@string/onboarding_sign_up_button_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/playerView"
-        app:layout_constraintTop_toBottomOf="@+id/signInButton" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
