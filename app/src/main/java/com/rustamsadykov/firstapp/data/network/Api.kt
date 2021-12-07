@@ -27,18 +27,20 @@ interface Api {
 
     @POST("registration/verification-code/send")
     suspend fun sendRegistrationVerificationCode(
-        @Query("email") email: String,
+        @Query("email") email: String
     ): NetworkResponse<Unit, SendRegistrationVerificationCodeErrorResponse>
 
     @POST("registration/verification-code/verify")
     suspend fun verifyRegistrationCode(
         @Query("code") code: String,
-        @Query("email") email: String?,
-        @Query("phone_number") phoneNumber: String?
+        @Query("email") email: String?
     ): NetworkResponse<VerificationTokenResponse, VerifyRegistrationCodeErrorResponse>
 
     @PUT("registration/create-profile")
     suspend fun createProfile(
         @Body request: CreateProfileRequest
     ): NetworkResponse<AuthTokens, CreateProfileErrorResponse>
+
+//    @POST("posts")
+//    suspend fun getPosts(): NetworkResponse<List<Post>, Unit>
 }
