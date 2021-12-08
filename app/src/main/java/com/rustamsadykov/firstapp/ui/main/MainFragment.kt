@@ -9,6 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentMainBinding
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
+import dev.chrisbanes.insetter.applyInsetter
 
 class MainFragment : BaseFragment(R.layout.fragment_main) {
 
@@ -24,6 +25,9 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
                         as NavHostFragment).navController
 
             bottomNavigationView.setupWithNavController(navController)
+            bottomNavigationView.applyInsetter {
+                type(navigationBars = true) { margin() }
+            }
         }
     }
 

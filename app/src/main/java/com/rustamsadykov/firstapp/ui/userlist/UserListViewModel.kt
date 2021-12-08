@@ -1,8 +1,10 @@
 package com.rustamsadykov.firstapp.ui.userlist
 
 import androidx.lifecycle.viewModelScope
+import com.rustamsadykov.firstapp.BuildConfig
 import com.rustamsadykov.firstapp.domain.User
-import com.rustamsadykov.firstapp.repository.network.Api
+import com.rustamsadykov.firstapp.data.network.Api
+import com.rustamsadykov.firstapp.data.network.MockApi
 import com.rustamsadykov.firstapp.ui.base.BaseViewModel
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.flow.Flow
@@ -38,18 +40,24 @@ class UserListViewModel : BaseViewModel() {
         return provideApi().getUsers().data
     }
 
-    private fun provideApi(): Api {
-        return Retrofit.Builder()
-            .client(provideOkHttpClient())
-            .baseUrl("https://reqres.in/api/")
-            .addConverterFactory(MoshiConverterFactory.create(provideMoshi()))
-            .build()
-            .create(Api::class.java)
-    }
+    private fun provideApi(): Api =
+        if (BuildConfig.USE_MOCK_BACKEND_API) {
+            MockApi()
+        } else {
+            Retrofit.Builder()
+                .client(provideOkHttpClient())
+                .baseUrl("https://reqres.in/api/")
+                .addConverterFactory(MoshiConverterFactory.create(provideMoshi()))
+                .build()
+                .create(Api::class.java)
+        }
 
-    private fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().build()
-    }
+    private fun provideOkHttpClient(): OkHttpClient =
+        OkHttpClient
+            .Builder()
+//            .addInterceptor(AuthorizationInterceptor(AuthRepository(api, ...)))
+//            .authenticator(OurAwesomeAppAuthenticator(AuthRepository(api, ...)))
+            .build()
 
     private fun provideMoshi(): Moshi {
         return Moshi.Builder().build()

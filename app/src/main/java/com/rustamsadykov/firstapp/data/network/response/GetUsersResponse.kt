@@ -1,4 +1,4 @@
-package com.rustamsadykov.firstapp.repository.network.response
+package com.rustamsadykov.firstapp.data.network.response
 
 import com.rustamsadykov.firstapp.domain.User
 import com.squareup.moshi.Json

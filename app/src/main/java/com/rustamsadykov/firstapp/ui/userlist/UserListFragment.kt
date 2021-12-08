@@ -14,9 +14,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentUserListBinding
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-
 
 class UserListFragment : BaseFragment(R.layout.fragment_user_list) {
 
@@ -27,10 +27,10 @@ class UserListFragment : BaseFragment(R.layout.fragment_user_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        observeViewState()
+        subscribeToViewState()
     }
 
-    private fun observeViewState() {
+    private fun subscribeToViewState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.viewState.collect(::renderViewState)
@@ -60,7 +60,7 @@ class UserListFragment : BaseFragment(R.layout.fragment_user_list) {
         val recyclerView = viewBinding.usersRecyclerView
 
         val itemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-        context?.let { getDrawable(it, R.drawable.divider_user)?.let { itemDecoration.setDrawable(it) } }
+        context?.let { getDrawable(it, R.drawable.bg_divider_user)?.let { itemDecoration.setDrawable(it) } }
         recyclerView.addItemDecoration(itemDecoration)
 
         recyclerView.adapter = UserAdapter()

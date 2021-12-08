@@ -9,13 +9,13 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentOnboardingBinding
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
+import dev.chrisbanes.insetter.applyInsetter
 import java.util.*
 
 class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
@@ -26,11 +26,11 @@ class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
 
     private var player: ExoPlayer? = null
 
-    private var scrollTimer: Timer? = null // FIXME: should it be here or ViewModel?
+    private var scrollTimer: Timer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        player = SimpleExoPlayer.Builder(requireContext()).build().apply {
+        player = ExoPlayer.Builder(requireContext()).build().apply {
             addMediaItem(MediaItem.fromUri("asset:///onboarding.mp4"))
             repeatMode = Player.REPEAT_MODE_ALL
             prepare()
@@ -39,6 +39,12 @@ class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewBinding.volumeControlButton.applyInsetter {
+            type(statusBars = true) { margin() }
+        }
+        viewBinding.signUpButton.applyInsetter {
+            type(navigationBars = true) { margin() }
+        }
         viewBinding.playerView.player = player
         viewBinding.onboardingViewPager.setTextPages()
         viewBinding.onboardingViewPager.attachDots(viewBinding.onboardingTextTabLayout)

@@ -2,10 +2,15 @@ package com.rustamsadykov.firstapp.ui
 
 import com.rustamsadykov.firstapp.repository.AuthRepository
 import com.rustamsadykov.firstapp.ui.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class MainViewModel : BaseViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val authRepository: AuthRepository
+): BaseViewModel() {
 
-    val isAuthorizedFlow: Flow<Boolean> = AuthRepository.isAuthorizedFlow
-
+    suspend fun isAuthorizedFlow(): Flow<Boolean> =
+        authRepository.isAuthorizedFlow()
 }
