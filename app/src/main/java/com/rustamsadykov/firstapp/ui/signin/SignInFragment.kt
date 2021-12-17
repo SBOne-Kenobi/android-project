@@ -3,6 +3,10 @@ package com.rustamsadykov.firstapp.ui.signin
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
+import android.view.ViewTreeObserver
+import android.view.animation.Animation
+import android.view.animation.BounceInterpolator
+import android.view.animation.TranslateAnimation
 import androidx.activity.addCallback
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -49,6 +53,32 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
         }
 
         subscribeToFormFields()
+        setupAnimations()
+    }
+
+    private fun setupAnimations() {
+        viewBinding.apply {
+            mknLogoImageView.viewTreeObserver.addOnPreDrawListener(
+                object : ViewTreeObserver.OnPreDrawListener {
+                    override fun onPreDraw(): Boolean {
+                        mknLogoImageView.viewTreeObserver.removeOnPreDrawListener(this)
+                        val startYPos = mknLogoImageView.y + mknLogoImageView.measuredHeight
+                        val fallingAnimation = TranslateAnimation(
+                            Animation.RELATIVE_TO_SELF, 0.0f,
+                            Animation.RELATIVE_TO_SELF, 0.0f,
+                            Animation.ABSOLUTE, -startYPos,
+                            Animation.RELATIVE_TO_SELF, 0.0f
+                        ).apply {
+                            duration = 2000
+                            fillAfter = true
+                            interpolator = BounceInterpolator()
+                        }
+                        mknLogoImageView.startAnimation(fallingAnimation)
+                        return true
+                    }
+                }
+            )
+        }
     }
 
     private fun onBackButtonPressed() {
