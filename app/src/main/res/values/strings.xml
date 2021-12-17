@@ -27,4 +27,7 @@
     <string name="sign_up_email_text_layout_hint">Почта</string>
     <string name="email_confirmation_description_text">Код подтверждения выслан вам на почту</string>
     <string name="email_confirmation_confirm_button_text">Подтвердить код</string>
+    <string name="profile_logout_button_text">Выйти</string>
+    <string name="common_general_error_text">Упс, ошибка :(</string>
+    <string name="profile_posts_text">Твои посты</string>
 </resources>

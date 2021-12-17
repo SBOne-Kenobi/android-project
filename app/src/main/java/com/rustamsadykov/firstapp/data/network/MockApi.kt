@@ -15,9 +15,11 @@ class MockApi : Api {
     override suspend fun getUsers(): GetUsersResponse {
         return GetUsersResponse((0 until 20).map {
             User(
-                "User $it",
-                "${it % 2 + 1}",
-                "https://thisanimedoesnotexist.ai/results/psi-1.3/seed${10000 + it}.png"
+                userName = "User $it",
+                groupName = "${it % 2 + 1}",
+                avatarUrl = "https://thisanimedoesnotexist.ai/results/psi-1.3/seed${10000 + it}.png",
+                firstName = "$it name",
+                secondName = "$it surname",
             )
         })
     }
@@ -73,6 +75,16 @@ class MockApi : Api {
                 refreshTokenExpiration = 1640871771000,
             ),
             code = 200
+        )
+    }
+
+    override suspend fun getProfile(): User {
+        return User(
+            userName = "SBOne",
+            groupName = "Group",
+            firstName = "Рустам",
+            secondName = "Садыков",
+            avatarUrl = "https://n1s1.hsmedia.ru/f3/52/0c/f3520ca0cb72fb4e839e3a12e815107a/700x753_0x0a330ca2_9038106971530192963.jpeg",
         )
     }
 

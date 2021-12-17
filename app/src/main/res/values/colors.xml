@@ -12,4 +12,6 @@
     <color name="brand_orange">#F7A83E</color>
     <color name="brand_green">#6DC8C3</color>
     <color name="brand_blue">#127ABE</color>
+    <color name="brand_light_blue">#ADD8F4</color>
+    <color name="brand_light_orange">#F5C584</color>
 </resources>
