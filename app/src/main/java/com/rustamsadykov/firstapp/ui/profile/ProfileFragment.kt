@@ -8,8 +8,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
 import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentProfileBinding
+import com.rustamsadykov.firstapp.domain.User
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
@@ -32,6 +34,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         viewBinding.logoutButton.setOnClickListener {
             viewModel.logout()
         }
+        viewBinding.userNameTextView.applyInsetter {
+            type(statusBars = true) { margin() }
+        }
+        fillProfile()
     }
 
     private fun subscribeToEvents() {
@@ -48,9 +54,28 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
                                 )
                                 .show()
                         }
+                        is ProfileViewModel.Event.LoadedProfile -> {
+                            fillProfile()
+                        }
                     }
                 }
             }
         }
     }
+
+    private fun fillProfile() {
+        viewBinding.apply {
+            viewModel.user?.apply {
+                userNameTextView.text = userName
+                firstNameTextView.text = firstName
+                secondNameTextView.text = secondName
+                Glide.with(avatarImageView)
+                    .load(avatarUrl)
+                    .circleCrop()
+                    .placeholder(R.mipmap.ic_launcher)
+                    .into(avatarImageView)
+            }
+        }
+    }
+
 }

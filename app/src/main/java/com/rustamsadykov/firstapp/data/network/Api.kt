@@ -8,6 +8,7 @@ import com.rustamsadykov.firstapp.data.network.response.GetUsersResponse
 import com.rustamsadykov.firstapp.data.network.response.VerificationTokenResponse
 import com.rustamsadykov.firstapp.data.network.response.error.*
 import com.rustamsadykov.firstapp.domain.AuthTokens
+import com.rustamsadykov.firstapp.domain.User
 import retrofit2.http.*
 
 interface Api {
@@ -41,6 +42,6 @@ interface Api {
         @Body request: CreateProfileRequest
     ): NetworkResponse<AuthTokens, CreateProfileErrorResponse>
 
-//    @POST("posts")
-//    suspend fun getPosts(): NetworkResponse<List<Post>, Unit>
+    @GET("users/get-profile")
+    suspend fun getProfile(): User
 }
