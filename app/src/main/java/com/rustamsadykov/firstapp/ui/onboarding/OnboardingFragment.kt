@@ -15,8 +15,11 @@ import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.rustamsadykov.firstapp.R
 import com.rustamsadykov.firstapp.databinding.FragmentOnboardingBinding
 import com.rustamsadykov.firstapp.ui.base.BaseFragment
+import com.rustamsadykov.firstapp.utils.extentions.dpToPx
 import dev.chrisbanes.insetter.applyInsetter
 import java.util.*
+import kotlin.math.abs
+import kotlin.math.min
 
 class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
 
@@ -46,8 +49,20 @@ class OnboardingFragment : BaseFragment(R.layout.fragment_onboarding) {
             type(navigationBars = true) { margin() }
         }
         viewBinding.playerView.player = player
-        viewBinding.onboardingViewPager.setTextPages()
-        viewBinding.onboardingViewPager.attachDots(viewBinding.onboardingTextTabLayout)
+
+        viewBinding.onboardingViewPager.apply {
+            setTextPages()
+            attachDots(viewBinding.onboardingTextTabLayout)
+            offscreenPageLimit = 1
+            setPageTransformer { page, position ->
+                val dist = abs(position)
+                page.scaleX = 1.0f - dist * 0.5f
+                page.scaleY = 1.0f - dist * 0.5f
+                page.translationX = -dpToPx(200.0f) * position
+                page.alpha = 1.0f - dist * 0.3f
+            }
+        }
+
         muteVideoHandler()
         startScrollTimer()
         setupListeners()
