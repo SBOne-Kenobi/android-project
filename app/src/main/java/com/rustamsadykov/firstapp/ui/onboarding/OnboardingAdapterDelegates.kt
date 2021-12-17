@@ -2,6 +2,7 @@ package com.rustamsadykov.firstapp.ui.onboarding
 
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import com.rustamsadykov.firstapp.databinding.ItemOnboardingTextBinding
+import com.rustamsadykov.firstapp.utils.extentions.dpToPx
 
 fun onboardingTextAdapterDelegate() =
     adapterDelegateViewBinding<String, CharSequence, ItemOnboardingTextBinding>(
@@ -10,7 +11,11 @@ fun onboardingTextAdapterDelegate() =
         },
         block = {
             bind {
-                binding.onboardingTextView.text = item
+                binding.onboardingTextView.apply {
+                    text = item
+                    val pad = dpToPx(48.0f).toInt()
+                    setPadding(pad, 0, pad, 0)
+                }
             }
         }
     )
