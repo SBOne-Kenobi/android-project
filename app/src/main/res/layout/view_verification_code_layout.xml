@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="androidx.appcompat.widget.LinearLayoutCompat">
+
+    <!-- FIXME: how to do it from code? Is it possible? -->
+    <com.rustamsadykov.firstapp.ui.emailconfirmation.VerificationCodeSlotView
+        style="@style/Widget.FirstApp.VerificationSlot" />
+
+</merge>

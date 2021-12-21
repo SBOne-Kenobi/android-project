@@ -23,20 +23,20 @@ class VerificationCodeEditText @JvmOverloads constructor(
     private val viewBinding =
         ViewVerificationCodeEditTextBinding.inflate(LayoutInflater.from(context), this)
 
-    private val slotViews: List<VerificationCodeSlotView> =
-        listOf(
-            viewBinding.slot1,
-            viewBinding.slot2,
-            viewBinding.slot3,
-            viewBinding.slot4,
-            viewBinding.slot5,
-            viewBinding.slot6,
-        )
+    private var slotViews: List<VerificationCodeSlotView> = emptyList()
 
-    private val slotValues: Array<CharSequence?> = Array(6) { null }
+    private var slotValues: Array<CharSequence?> = emptyArray()
 
-    private var numberOfSlots: Int by Delegates.observable(0) { _, _, newValue ->
-        // TODO: handle.
+    private var numberOfSlots: Int by Delegates.observable(6) { _, _, newValue ->
+        repeat(newValue) {
+            LayoutInflater.from(context).inflate(
+                R.layout.view_verification_code_layout, viewBinding.slotLinearLayout
+            )
+        }
+        slotViews = List(newValue) {
+            viewBinding.slotLinearLayout.getChildAt(it) as VerificationCodeSlotView
+        }
+        slotValues = Array(newValue) { null }
     }
 
     var onVerificationCodeFilledListener: (String) -> Unit = {}

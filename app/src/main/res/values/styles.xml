@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Widget.FirstApp.VerificationSlot" parent="">
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:layout_width">@dimen/verification_code_slot_width</item>
+        <item name="android:layout_height">@dimen/verification_code_slot_height</item>
+        <item name="android:background">@drawable/selector_bg_verification_code_slot</item>
+    </style>
+
     <style name="Widget.FirstApp.Button" parent="Widget.MaterialComponents.Button">
         <item name="android:minHeight">56dp</item>
         <item name="android:textColor">@color/black</item>

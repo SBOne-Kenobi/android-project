@@ -28,11 +28,12 @@ class SignUpViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             try {
-                authInteractor.signInWithEmail(
-                    email = email,
-                    password = password
-                )
-                _eventChannel.send(Event.SignUpSuccess)
+//                authInteractor.signInWithEmail(
+//                    email = email,
+//                    password = password
+//                )
+//                _eventChannel.send(Event.SignUpSuccess)
+                throw Exception()
             } catch (error: Exception) {
                 _eventChannel.send(Event.SignUpEmailConfirmationRequired)
             }
